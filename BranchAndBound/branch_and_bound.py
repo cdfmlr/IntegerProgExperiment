@@ -20,7 +20,7 @@ def is_int(n) -> bool:
     return (n - math.floor(n) < epsilon) or (math.ceil(n) - n < epsilon)
 
 
-def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=BnBTree().root):
+def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=None):
     """
     branch_and_bound 对整数规划问题使用「分支定界法」进行*递归*求解。
 
@@ -28,6 +28,13 @@ def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=BnBTree().ro
     该算法只是在 scipy.optimize.linprog 求解的基础上加以整数约束，
     所以求解问题的模型、参数中的 c, A_ub, b_ub, A_eq, b_eq, bounds
     与 scipy.optimize.linprog 的完全相同。
+
+    问题模型：
+        Minimize:     c^T * x
+    
+        Subject to:   A_ub * x <= b_ub
+                      A_eq * x == b_eq
+                      (x are integers)
 
     你可以提供一个 BnBTreeNode 实例作为根节点来记录求解过程，得到一个求解过程的树形图。
     如果需要这样的求解过程的树形图，你可以这样调用 branch_and_bound：
@@ -39,14 +46,6 @@ def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=BnBTree().ro
         r = branch_and_bound(c, A_ub, b_ub, None, None, bounds, tree.root)
         print(r)    # 打印求解结果
         print(tree) # 打印求解过程的树形图
-
-
-    问题模型：
-        Minimize:     c^T * x
-    
-        Subject to:   A_ub * x <= b_ub
-                      A_eq * x == b_eq
-                      (x are integers)
 
     Parameters
     ----------
@@ -84,8 +83,10 @@ def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=BnBTree().ro
 
     # 对松弛问题求解
     r = optimize.linprog(c, A_ub, b_ub, A_eq, b_eq, bounds)
-    bnbTreeNode.res_x = r.x
-    bnbTreeNode.res_fun = r.fun
+
+    if bnbTreeNode:
+        bnbTreeNode.res_x = r.x
+        bnbTreeNode.res_fun = r.fun
 
     if not r.success:
         return {"success": False, "x": None, "fun": None}
@@ -109,13 +110,14 @@ def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=BnBTree().ro
     new_B1.append(math.floor(x[opt_idx]))
 
     # 构造新问题的 BnBTreeNode
-    bnbTreeNode.left = BnBTreeNode()
-    bnbTreeNode.left.x_idx = opt_idx
-    bnbTreeNode.left.x_c = "<="
-    bnbTreeNode.left.x_b = math.floor(x[opt_idx])
+    if bnbTreeNode:
+        bnbTreeNode.left = BnBTreeNode()
+        bnbTreeNode.left.x_idx = opt_idx
+        bnbTreeNode.left.x_c = "<="
+        bnbTreeNode.left.x_b = math.floor(x[opt_idx])
 
     # 递归求解新问题
-    r1 = branch_and_bound(c, new_A1, new_B1, A_eq, b_eq, bounds, bnbTreeNode.left)
+    r1 = branch_and_bound(c, new_A1, new_B1, A_eq, b_eq, bounds, bnbTreeNode.left if bnbTreeNode else None)
 
     # 构造新的条件
     # con2: >
@@ -126,13 +128,14 @@ def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=BnBTree().ro
     new_B2.append(-math.ceil(x[opt_idx]))
 
     # 构造新问题的 BnBTreeNode
-    bnbTreeNode.right = BnBTreeNode()
-    bnbTreeNode.right.x_idx = opt_idx
-    bnbTreeNode.right.x_c = ">="
-    bnbTreeNode.right.x_b = math.ceil(x[opt_idx])
+    if bnbTreeNode:
+        bnbTreeNode.right = BnBTreeNode()
+        bnbTreeNode.right.x_idx = opt_idx
+        bnbTreeNode.right.x_c = ">="
+        bnbTreeNode.right.x_b = math.ceil(x[opt_idx])
 
     # 递归求解新问题
-    r2 = branch_and_bound(c, new_A2, new_B2, A_eq, b_eq, bounds, bnbTreeNode.right)
+    r2 = branch_and_bound(c, new_A2, new_B2, A_eq, b_eq, bounds, bnbTreeNode.right if bnbTreeNode else None)
 
     # 子问题返回了，找出其中的最优可行继续向上一层返回
     if r1["success"] and r2["success"]:

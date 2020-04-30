@@ -33,7 +33,7 @@ class BnBTreeNode(object):
 
     def __str__(self):
         if self.sub_flag:
-            return f'x{self.x_idx} {self.x_c} {self.x_b}: {self.res_x} -> {self.res_fun}'
+            return f'x[{self.x_idx}] {self.x_c} {self.x_b}: {self.res_x} -> {self.res_fun}'
         else:
             return f'Root: {self.res_x} -> {self.res_fun}'
 
