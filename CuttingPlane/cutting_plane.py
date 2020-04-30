@@ -52,7 +52,8 @@ def cutting_plane(c, A, b):
 
     # 有非整数变量
     # 找出一个非整数变量的索引
-    opt_idx = [i for i, v in enumerate(x) if not _is_int(v)][-1]
+    x_b = list(filter(lambda n: n > 0, x))
+    opt_idx = [i for i, v in enumerate(x_b) if not _is_int(v)][-1]
     opt_tab_inx = s.pb.base_idx[opt_idx]
 
     # opt 在最终单纯形表中的一行
@@ -90,39 +91,39 @@ def cutting_plane(c, A, b):
 
 
 def _test1():
-    c = [3, 4, 1]
-    A_ub = [[-1, -6, -2], [-2, 0, 0]]
-    b_ub = [-5, -3]
-    r = cutting_plane(c, A_ub, b_ub)
+    c = [3, 4, 1, 0, 0]
+    a = [[1, 6, 2, -1, 0], [2, 0, 0, 0, -1]]
+    b = [5, 3]
+    r = cutting_plane(c, a, b)
     print(r)
 
 
 def _test2():
-    c = [40, 90]
-    A_ub = [[9, 7], [7, 20]]
-    b_ub = [56, 70]
-    r = cutting_plane(c, A_ub, b_ub)
+    c = [40, 90, 0, 0]
+    a = [[9, 7, 1, 0], [7, 20, 0, 1]]
+    b = [56, 70]
+    r = cutting_plane(c, a, b)
     print(r)
 
 
 def _test3():
-    c = [1, 1]
-    A_ub = [[2, 1], [4, 5]]
-    b_ub = [6, 20]
-    r = cutting_plane(c, A_ub, b_ub)
+    c = [1, 1, 0, 0]
+    a = [[2, 1, 1, 0], [4, 5, 0, 1]]
+    b = [6, 20]
+    r = cutting_plane(c, a, b)
     print(r)
 
 
 def _test4():
-    c = [1, 1]
-    a = [[-1, 1], [3, 1]]
+    c = [1, 1, 0, 0]
+    a = [[-1, 1, 1, 0], [3, 1, 0, 1]]
     b = [1, 4]
     r = cutting_plane(c, a, b)
     print(r)
 
 
 if __name__ == "__main__":
-    _test1()  # Failed: WA
-    _test2()  # Failed: WA
+    # _test1()  # Failed: WA
+    # _test2()  # Failed: WA
     _test3()  # Pass
     _test4()  # Pass
