@@ -5,10 +5,10 @@ from scipy import optimize
 from BranchAndBound.bnb_Tree import BnBTree, BnBTreeNode
 
 # epsilon 是算法中判断「零」的临界值，绝对值小于该值的数认为是0
-epsilon = 1e-8
+_epsilon = 1e-8
 
 
-def is_int(n) -> bool:
+def _is_int(n) -> bool:
     """
     is_int 是判断给定数字 n 是否为整数，
     在判断中 n 小于epsilon的小数部分将被忽略，
@@ -17,7 +17,7 @@ def is_int(n) -> bool:
     :param n: 待判断的数字
     :return: True if n is A_ub integer, False else
     """
-    return (n - math.floor(n) < epsilon) or (math.ceil(n) - n < epsilon)
+    return (n - math.floor(n) < _epsilon) or (math.ceil(n) - n < _epsilon)
 
 
 def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=None):
@@ -94,12 +94,12 @@ def branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=None):
     x = r.x
     z = sum(np.array(x) * np.array(c))
 
-    if all([is_int(i) for i in x]):  # 最优解是整数解
+    if all([_is_int(i) for i in x]):  # 最优解是整数解
         return {"success": True, "x": x, "fun": z}
 
     # 有非整数变量
     # 找出第一个非整数变量的索引
-    opt_idx = [i for i, v in enumerate(x) if not is_int(v)][0]
+    opt_idx = [i for i, v in enumerate(x) if not _is_int(v)][0]
 
     # 构造新的条件、问题
     # con1: <=
