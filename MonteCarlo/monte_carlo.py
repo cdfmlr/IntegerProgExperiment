@@ -1,5 +1,25 @@
+import os
 import time
 import random
+from multiprocessing import Process, Queue
+
+
+def _monte_carlo_processing(x_nums, fun, cons, bounds, random_times, q: Queue):
+    """
+    monte_carlo 的子进程函数，完成随机试验，向 Queue 传递结果
+    """
+    random.seed(time.time() + os.getpid())
+    pb = 0
+    xb = []
+    for i in range(random_times):
+        x = [random.randint(bounds[i][0], bounds[i][1]) for i in range(x_nums)]  # 产生一行x_nums列的区间[0, 99] 上的随机整数
+        rf = fun(x)
+        rg = cons(x)
+        if all((a < 0 for a in rg)):  # 若 rg 中所有元素都小于 0，即符合约束条件
+            if pb < rf:
+                xb = x
+                pb = rf
+    q.put({"fun": pb, "x": xb})
 
 
 def monte_carlo(x_nums, fun, cons, bounds, random_times=10 ** 5):
@@ -48,18 +68,31 @@ def monte_carlo(x_nums, fun, cons, bounds, random_times=10 ** 5):
         {'fun': 4, 'x': [1, 3]}
     可以看的 monte_carlo 返回了一个满意解（事实上，这是个最优解，但一般情况下不是）。
     """
-    random.seed(time.time)
-    pb = 0
-    xb = []
-    for i in range(random_times):
-        x = [random.randint(bounds[i][0], bounds[i][1]) for i in range(x_nums)]  # 产生一行x_nums列的区间[0, 99] 上的随机整数
-        rf = fun(x)
-        rg = cons(x)
-        if all((a < 0 for a in rg)):  # 若 rg 中所有元素都小于 0，即符合约束条件
-            if pb < rf:
-                xb = x
-                pb = rf
-    return {"fun": pb, "x": xb}
+    result_queue = Queue()
+    processes = []
+
+    cpus = os.cpu_count() + 2
+    if cpus < 1:
+        cpus = 1
+    sub_times = random_times // cpus
+    for i in range(cpus):
+        processes.append(Process(target=_monte_carlo_processing,
+                                 args=(x_nums, fun, cons, bounds, sub_times, result_queue)))
+    for p in processes:
+        p.start()
+
+    for p in processes:
+        p.join()
+
+    if not result_queue.empty():
+        data = result_queue.get()
+        best = dict(data)
+        while not result_queue.empty():
+            data = result_queue.get()
+            if data["fun"] < best["fun"]:
+                best = dict(data)
+        return best
+    return None
 
 
 def _test1():
@@ -107,7 +140,7 @@ def _test3():
         ]
 
     bounds = [(0, 99)] * 5
-    r = monte_carlo(5, f, g, bounds)
+    r = monte_carlo(5, f, g, bounds, random_times=10 ** 6)
     print(r)
 
 
