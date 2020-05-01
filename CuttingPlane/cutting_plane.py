@@ -1,6 +1,4 @@
 import math
-import numpy as np
-from scipy import optimize
 
 from CuttingPlane.linprog.problem import LpProblem
 from CuttingPlane.linprog.simplex_method import SimplexMethod
@@ -24,6 +22,27 @@ def _is_int(n) -> bool:
 def cutting_plane(c, A, b):
     """
     cutting_plane 对整数规划问题使用「割平面法」进行*递归*求解。
+
+    **对于部分问题，该算法无法给出正确的结果，原因未知。不推荐使用**
+
+    底层对松弛问题求解使用 cdfmlr/SimplexLinprog 完成。
+
+    问题模型：
+        Maximize:     c^T * x
+
+        Subject to:   A * x == b
+                      (x are integers)
+
+    Parameters
+    ----------
+    :param c: 系数矩阵。array_like
+        Coefficients of the linear objective function to be maximized.
+    :param A: 等式约束条件矩阵，array_like
+        2-D array which, when matrix-multiplied by ``x``, gives the values of
+        the equality constraints at ``x``.
+    :param b: 等式约束条件右端常数，array_like
+        1-D array of values representing the RHS of each equality constraint
+        (row) in ``A``.
 
     Returns
     -------

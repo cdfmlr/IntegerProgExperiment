@@ -1,5 +1,5 @@
 """
-BranchAndBound 提供求解整数规划问题的「分支定界法」
+BranchAndBound 提供求解整数线性规划问题的「分支定界法」
 
 Public
 ------

@@ -3,6 +3,51 @@ import random
 
 
 def monte_carlo(x_nums, fun, cons, bounds, random_times=10 ** 5):
+    """
+    monte_carlo 对整数规划问题使用「蒙特卡洛法」求满意解
+
+    对于线性、非线性的整数规划，在一定计算量下可以考虑用 蒙特卡洛法 得到一个满意解。
+
+    注意：蒙特卡洛法只能在一定次数的模拟中求一个满意解（通常不是最优的），而且对于每个变量必须给出有明确上下界的取值范围。
+
+    问题模型：
+        Minimize:   fun(x)
+
+        Subject to: cons(x) <= 0
+                    (x are integers)
+
+    Parameters
+    ----------
+    :param x_nums: `int`, 未知数向量 x 的元素个数
+    :param fun:  `(x: list) -> float`, 要最小化的目标函数
+    :param cons: `(x: list) -> list`, 小于等于 0 的约束条件
+    :param bounds: `list`, 各个 x 的取值范围
+    :param random_times: `int`, 随机模拟次数
+
+    Returns
+    -------
+    :return: {"x": array([...]), "fun": ...}
+                - x: 最优解
+                - fun: 最优目标函数值
+
+    Examples
+    --------
+    试求得如下整数规划问题的一个满意解：
+        Min  x_0 + x_1
+        s.t. 2 * x_0 + x_1 <= 6
+             4 * x_0 + 5 * x_1 <= 20
+             (x_0、x_1 为整数)
+    编写目标函数：
+        >>> fun = lambda x: x[0] + x[1]
+    编写约束条件：
+        >>> cons = lambda x: [2 * x[0] + x[1] - 6, 4 * x[0] + 5 * x[1] - 20]
+    指定取值范围：
+        >>> bounds = [(0, 100), (0, 100)]
+    调用蒙特卡洛法求解：
+        >>> monte_carlo(2, fun, cons, bounds)
+        {'fun': 4, 'x': [1, 3]}
+    可以看的 monte_carlo 返回了一个满意解（事实上，这是个最优解，但一般情况下不是）。
+    """
     random.seed(time.time)
     pb = 0
     xb = []
@@ -14,7 +59,6 @@ def monte_carlo(x_nums, fun, cons, bounds, random_times=10 ** 5):
             if pb < rf:
                 xb = x
                 pb = rf
-
     return {"fun": pb, "x": xb}
 
 

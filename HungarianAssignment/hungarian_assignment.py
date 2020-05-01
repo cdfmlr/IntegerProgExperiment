@@ -7,7 +7,12 @@ def hungarian_assignment(cost_matrix):
     hungarian_assignment 指派问题的匈牙利解法
 
     :param cost_matrix: 指派问题的系数矩阵
-    :return: np.where(指派)
+    :return: row_ind, col_ind : array
+        An array of row indices and one of corresponding column indices giving
+        the optimal assignment. The cost of the assignment can be computed
+        as ``cost_matrix[row_ind, col_ind].sum()``. The row indices will be
+        sorted; in the case of a square cost matrix they will be equal to
+        ``numpy.arange(cost_matrix.shape[0])``.
     """
 
     cost_matrix = np.asarray(cost_matrix)
