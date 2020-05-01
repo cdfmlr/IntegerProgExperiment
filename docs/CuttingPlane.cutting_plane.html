@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: function cutting_plane</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+<dl><dt><a name="-CuttingPlane.cutting_plane"><strong>CuttingPlane.cutting_plane</strong></a> = cutting_plane(c, A, b)</dt><dd><tt>cutting_plane&nbsp;对整数规划问题使用「割平面法」进行*递归*求解。<br>
+&nbsp;<br>
+**对于部分问题，该算法无法给出正确的结果，原因未知。不推荐使用**<br>
+&nbsp;<br>
+底层对松弛问题求解使用&nbsp;cdfmlr/SimplexLinprog&nbsp;完成。<br>
+&nbsp;<br>
+问题模型：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Maximize:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c^T&nbsp;*&nbsp;x<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Subject&nbsp;to:&nbsp;&nbsp;&nbsp;A&nbsp;*&nbsp;x&nbsp;==&nbsp;b<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x&nbsp;are&nbsp;integers)<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+:param&nbsp;c:&nbsp;系数矩阵。array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Coefficients&nbsp;of&nbsp;the&nbsp;linear&nbsp;objective&nbsp;function&nbsp;to&nbsp;be&nbsp;maximized.<br>
+:param&nbsp;A:&nbsp;等式约束条件矩阵，array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2-D&nbsp;array&nbsp;which,&nbsp;when&nbsp;matrix-multiplied&nbsp;by&nbsp;``x``,&nbsp;gives&nbsp;the&nbsp;values&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;equality&nbsp;constraints&nbsp;at&nbsp;``x``.<br>
+:param&nbsp;b:&nbsp;等式约束条件右端常数，array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1-D&nbsp;array&nbsp;of&nbsp;values&nbsp;representing&nbsp;the&nbsp;RHS&nbsp;of&nbsp;each&nbsp;equality&nbsp;constraint<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(row)&nbsp;in&nbsp;``A``.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+:return:&nbsp;{"success":&nbsp;True|False,&nbsp;"x":&nbsp;array([...]),&nbsp;"fun":&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;success:&nbsp;若求解成功则返回&nbsp;True，否则&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;x:&nbsp;最优解<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;fun:&nbsp;最优目标函数值</tt></dd></dl>
+
+</body></html>

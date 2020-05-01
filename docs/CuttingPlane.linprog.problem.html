@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module CuttingPlane.linprog.problem</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="CuttingPlane.html"><font color="#ffffff">CuttingPlane</font></a>.<a href="CuttingPlane.linprog.html"><font color="#ffffff">linprog</font></a>.problem</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/c/Projects/IntegerProgExperiment/CuttingPlane/linprog/problem.py">/Users/c/Projects/IntegerProgExperiment/CuttingPlane/linprog/problem.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="CuttingPlane.linprog.problem.html#LpProblem">LpProblem</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LpProblem">class <strong>LpProblem</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#LpProblem">LpProblem</a>(c,&nbsp;a,&nbsp;b)<br>
+&nbsp;<br>
+<a href="#LpProblem">LpProblem</a>&nbsp;描述一个线性规划问题<br>
+&nbsp;<br>
+:attribute&nbsp;c:&nbsp;目标函数系数,&nbsp;&nbsp;&lt;math&gt;&nbsp;c&nbsp;=&nbsp;(c_1,&nbsp;c_2,&nbsp;...,&nbsp;c_n)^T&nbsp;&lt;/math&gt;<br>
+:attribute&nbsp;a:&nbsp;系数矩阵,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;math&gt;&nbsp;a&nbsp;=&nbsp;(a_{ij})_{m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imes&nbsp;n}&nbsp;=&nbsp;(p_1,&nbsp;p_2,&nbsp;...,&nbsp;p_n)&nbsp;&lt;/math&gt;<br>
+:attribute&nbsp;b:&nbsp;右端常数,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;math&gt;&nbsp;b&nbsp;=&nbsp;(b_1,&nbsp;b_2,&nbsp;...,&nbsp;b_m)^T,&nbsp;b&nbsp;&gt;&nbsp;0&nbsp;&lt;/math&gt;<br>
+:attribute&nbsp;base_idx:&nbsp;基变量的下标集合<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LpProblem-__init__"><strong>__init__</strong></a>(self, c, a, b)</dt><dd><tt>:param&nbsp;c:&nbsp;目标函数系数,&nbsp;&nbsp;&lt;math&gt;&nbsp;c&nbsp;=&nbsp;(c_1,&nbsp;c_2,&nbsp;...,&nbsp;c_n)^T&nbsp;&lt;/math&gt;<br>
+:param&nbsp;a:&nbsp;系数矩阵,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;math&gt;&nbsp;a&nbsp;=&nbsp;(a_{ij})_{m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imes&nbsp;n}&nbsp;=&nbsp;(p_1,&nbsp;p_2,&nbsp;...,&nbsp;p_n)&nbsp;&lt;/math&gt;<br>
+:param&nbsp;b:&nbsp;右端常数,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;math&gt;&nbsp;b&nbsp;=&nbsp;(b_1,&nbsp;b_2,&nbsp;...,&nbsp;b_m)^T,&nbsp;b&nbsp;&gt;&nbsp;0&nbsp;&lt;/math&gt;</tt></dd></dl>
+
+<dl><dt><a name="LpProblem-solve"><strong>solve</strong></a>(self, solver: type, **kwargs)</dt><dd><tt>调用指定算法，求解线性规划问题<br>
+&nbsp;<br>
+:param&nbsp;solver:&nbsp;指定算法(LpSolver实例)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

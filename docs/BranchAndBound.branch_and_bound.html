@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: function branch_and_bound</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+<dl><dt><a name="-BranchAndBound.branch_and_bound"><strong>BranchAndBound.branch_and_bound</strong></a> = branch_and_bound(c, A_ub, b_ub, A_eq, b_eq, bounds, bnbTreeNode=None)</dt><dd><tt>branch_and_bound&nbsp;对整数规划问题使用「分支定界法」进行*递归*求解。<br>
+&nbsp;<br>
+底层对松弛问题求解使用&nbsp;scipy.optimize.linprog&nbsp;完成，<br>
+该算法只是在&nbsp;scipy.optimize.linprog&nbsp;求解的基础上加以整数约束，<br>
+所以求解问题的模型、参数中的&nbsp;c,&nbsp;A_ub,&nbsp;b_ub,&nbsp;A_eq,&nbsp;b_eq,&nbsp;bounds<br>
+与&nbsp;scipy.optimize.linprog&nbsp;的完全相同。<br>
+&nbsp;<br>
+问题模型：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Minimize:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c^T&nbsp;*&nbsp;x<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Subject&nbsp;to:&nbsp;&nbsp;&nbsp;A_ub&nbsp;*&nbsp;x&nbsp;&lt;=&nbsp;b_ub<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A_eq&nbsp;*&nbsp;x&nbsp;==&nbsp;b_eq<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x&nbsp;are&nbsp;integers)<br>
+&nbsp;<br>
+你可以提供一个&nbsp;BnBTreeNode&nbsp;实例作为根节点来记录求解过程，得到一个求解过程的树形图。<br>
+如果需要这样的求解过程的树形图，你可以这样调用&nbsp;branch_and_bound：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c&nbsp;=&nbsp;[-40,&nbsp;-90]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A_ub&nbsp;=&nbsp;[[9,&nbsp;7],&nbsp;[7,&nbsp;20]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b_ub&nbsp;=&nbsp;[56,&nbsp;70]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bounds&nbsp;=&nbsp;[(0,&nbsp;None),&nbsp;(0,&nbsp;None)]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tree&nbsp;=&nbsp;BnBTree()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r&nbsp;=&nbsp;branch_and_bound(c,&nbsp;A_ub,&nbsp;b_ub,&nbsp;None,&nbsp;None,&nbsp;bounds,&nbsp;tree.root)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(r)&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;打印求解结果<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(tree)&nbsp;#&nbsp;打印求解过程的树形图<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+:param&nbsp;c:&nbsp;系数矩阵。array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Coefficients&nbsp;of&nbsp;the&nbsp;linear&nbsp;objective&nbsp;function&nbsp;to&nbsp;be&nbsp;minimized.<br>
+:param&nbsp;A_ub:&nbsp;不等式约束条件矩阵，array_like,&nbsp;若无则需要传入&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2-D&nbsp;array&nbsp;which,&nbsp;when&nbsp;matrix-multiplied&nbsp;by&nbsp;``x``,&nbsp;gives&nbsp;the&nbsp;values&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;upper-bound&nbsp;inequality&nbsp;constraints&nbsp;at&nbsp;``x``.<br>
+:param&nbsp;b_ub:&nbsp;不等式约束条件右端常数，array_like,&nbsp;若无则需要传入&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1-D&nbsp;array&nbsp;of&nbsp;values&nbsp;representing&nbsp;the&nbsp;upper-bound&nbsp;of&nbsp;each&nbsp;inequality<br>
+&nbsp;&nbsp;&nbsp;&nbsp;constraint&nbsp;(row)&nbsp;in&nbsp;``A_ub``.<br>
+:param&nbsp;A_eq:&nbsp;等式约束条件矩阵，array_like,&nbsp;若无则需要传入&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2-D&nbsp;array&nbsp;which,&nbsp;when&nbsp;matrix-multiplied&nbsp;by&nbsp;``x``,&nbsp;gives&nbsp;the&nbsp;values&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;equality&nbsp;constraints&nbsp;at&nbsp;``x``.<br>
+:param&nbsp;b_eq:&nbsp;等式约束条件右端常数，array_like,&nbsp;若无则需要传入&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1-D&nbsp;array&nbsp;of&nbsp;values&nbsp;representing&nbsp;the&nbsp;RHS&nbsp;of&nbsp;each&nbsp;equality&nbsp;constraint<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(row)&nbsp;in&nbsp;``A_eq``.<br>
+:param&nbsp;bounds:&nbsp;变量取值范围，sequence<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``(min,&nbsp;max)``&nbsp;pairs&nbsp;for&nbsp;each&nbsp;element&nbsp;in&nbsp;``x``,&nbsp;defining<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;bounds&nbsp;on&nbsp;that&nbsp;parameter.&nbsp;Use&nbsp;None&nbsp;for&nbsp;one&nbsp;of&nbsp;``min``&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``max``&nbsp;when&nbsp;there&nbsp;is&nbsp;no&nbsp;bound&nbsp;in&nbsp;that&nbsp;direction.&nbsp;By&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bounds&nbsp;are&nbsp;``(0,&nbsp;None)``&nbsp;(non-negative)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;sequence&nbsp;containing&nbsp;a&nbsp;single&nbsp;tuple&nbsp;is&nbsp;provided,&nbsp;then&nbsp;``min``&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``max``&nbsp;will&nbsp;be&nbsp;applied&nbsp;to&nbsp;all&nbsp;variables&nbsp;in&nbsp;the&nbsp;problem.<br>
+:param&nbsp;bnbTreeNode:&nbsp;该步的&nbsp;bnbTreeNode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;提供一个&nbsp;BnBTreeNode&nbsp;实例作为根节点来记录求解过程，得到一个求解过程的树形图。<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+:return:&nbsp;{"success":&nbsp;True|False,&nbsp;"x":&nbsp;array([...]),&nbsp;"fun":&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;success:&nbsp;若求解成功则返回&nbsp;True，否则&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;x:&nbsp;最优解<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;fun:&nbsp;最优目标函数值</tt></dd></dl>
+
+</body></html>

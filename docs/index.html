@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857143;
+        overflow-x: hidden;
+        background-image: inherit;
+        background-size: inherit;
+        background-attachment: inherit;
+        background-origin: inherit;
+        background-clip: inherit;
+        background-color: inherit;
+        tab-size: 4;
+        background-position: inherit inherit;
+        background-repeat: inherit inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:last-child {
+        margin-bottom: 0.5rem;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        font-style: inherit;
+        font-variant-caps: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        line-height: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    p {
+        line-height: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.701961);
+        color: rgb(85, 85, 85);
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right-width: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror-linenumber {
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background-image: inherit;
+        background-size: inherit;
+        background-attachment: inherit;
+        background-origin: inherit;
+        background-clip: inherit;
+        background-color: inherit;
+        position: relative !important;
+        background-position: inherit inherit;
+        background-repeat: inherit inherit;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+        background-position: 0px 0px;
+        background-repeat: initial initial;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid-page;
+            break-before: avoid-page;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid-page;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background-color: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+        background-position: initial initial;
+        background-repeat: initial initial;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+        border: none;
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-position: initial initial;
+        background-repeat: initial initial;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border: none !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        text-shadow: initial !important;
+        background-position: 0px 0px !important;
+        background-repeat: initial initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="flow"] svg, [lang="mermaid"] svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom-width: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+    svg[id^="mermaidChart"] {
+        line-height: 1em;
+    }
+
+    mark {
+        background-color: rgb(255, 255, 0);
+        color: rgb(0, 0, 0);
+        background-position: initial initial;
+        background-repeat: initial initial;
+    }
+
+    .md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong {
+        color: inherit;
+    }
+
+    mark .md-meta {
+        color: rgb(0, 0, 0);
+        opacity: 0.3 !important;
+    }
+
+
+    .CodeMirror {
+        height: auto;
+    }
+
+    .CodeMirror.cm-s-inner {
+        background-image: inherit;
+        background-size: inherit;
+        background-attachment: inherit;
+        background-origin: inherit;
+        background-clip: inherit;
+        background-color: inherit;
+        background-position: inherit inherit;
+        background-repeat: inherit inherit;
+    }
+
+    .CodeMirror-scroll {
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .CodeMirror-gutters {
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: rgb(221, 221, 221);
+        background-image: inherit;
+        background-size: inherit;
+        background-attachment: inherit;
+        background-origin: inherit;
+        background-clip: inherit;
+        background-color: inherit;
+        white-space: nowrap;
+        background-position: inherit inherit;
+        background-repeat: inherit inherit;
+    }
+
+    .CodeMirror-linenumber {
+        padding: 0px 3px 0px 5px;
+        text-align: right;
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-keyword {
+        color: rgb(119, 0, 136);
+    }
+
+    .cm-s-inner .cm-atom, .cm-s-inner.cm-atom {
+        color: rgb(34, 17, 153);
+    }
+
+    .cm-s-inner .cm-number {
+        color: rgb(17, 102, 68);
+    }
+
+    .cm-s-inner .cm-def {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-variable {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-variable-2 {
+        color: rgb(0, 85, 170);
+    }
+
+    .cm-s-inner .cm-variable-3 {
+        color: rgb(0, 136, 85);
+    }
+
+    .cm-s-inner .cm-string {
+        color: rgb(170, 17, 17);
+    }
+
+    .cm-s-inner .cm-property {
+        color: rgb(0, 0, 0);
+    }
+
+    .cm-s-inner .cm-operator {
+        color: rgb(152, 26, 26);
+    }
+
+    .cm-s-inner .cm-comment, .cm-s-inner.cm-comment {
+        color: rgb(170, 85, 0);
+    }
+
+    .cm-s-inner .cm-string-2 {
+        color: rgb(255, 85, 0);
+    }
+
+    .cm-s-inner .cm-meta {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-qualifier {
+        color: rgb(85, 85, 85);
+    }
+
+    .cm-s-inner .cm-builtin {
+        color: rgb(51, 0, 170);
+    }
+
+    .cm-s-inner .cm-bracket {
+        color: rgb(153, 153, 119);
+    }
+
+    .cm-s-inner .cm-tag {
+        color: rgb(17, 119, 0);
+    }
+
+    .cm-s-inner .cm-attribute {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+        color: rgb(0, 0, 255);
+    }
+
+    .cm-s-inner .cm-quote, .cm-s-inner.cm-quote {
+        color: rgb(0, 153, 0);
+    }
+
+    .cm-s-inner .cm-hr, .cm-s-inner.cm-hr {
+        color: rgb(153, 153, 153);
+    }
+
+    .cm-s-inner .cm-link, .cm-s-inner.cm-link {
+        color: rgb(0, 0, 204);
+    }
+
+    .cm-negative {
+        color: rgb(221, 68, 68);
+    }
+
+    .cm-positive {
+        color: rgb(34, 153, 34);
+    }
+
+    .cm-header, .cm-strong {
+        font-weight: 700;
+    }
+
+    .cm-del {
+        text-decoration: line-through;
+    }
+
+    .cm-em {
+        font-style: italic;
+    }
+
+    .cm-link {
+        text-decoration: underline;
+    }
+
+    .cm-error {
+        color: red;
+    }
+
+    .cm-invalidchar {
+        color: red;
+    }
+
+    .cm-constant {
+        color: rgb(38, 139, 210);
+    }
+
+    .cm-defined {
+        color: rgb(181, 137, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-matchingbracket {
+        color: rgb(0, 255, 0);
+    }
+
+    div.CodeMirror span.CodeMirror-nonmatchingbracket {
+        color: rgb(255, 34, 34);
+    }
+
+    .cm-s-inner .CodeMirror-activeline-background {
+        background-image: inherit;
+        background-size: inherit;
+        background-attachment: inherit;
+        background-origin: inherit;
+        background-clip: inherit;
+        background-color: inherit;
+        background-position: inherit inherit;
+        background-repeat: inherit inherit;
+    }
+
+    .CodeMirror {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scroll {
+        height: 100%;
+        outline: 0px;
+        position: relative;
+        box-sizing: content-box;
+        background-image: inherit;
+        background-size: inherit;
+        background-attachment: inherit;
+        background-origin: inherit;
+        background-clip: inherit;
+        background-color: inherit;
+        background-position: inherit inherit;
+        background-repeat: inherit inherit;
+    }
+
+    .CodeMirror-sizer {
+        position: relative;
+    }
+
+    .CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar {
+        position: absolute;
+        z-index: 6;
+        display: none;
+    }
+
+    .CodeMirror-vscrollbar {
+        right: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-hscrollbar {
+        bottom: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .CodeMirror-scrollbar-filler {
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutter-filler {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .CodeMirror-gutters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
+
+    .CodeMirror-gutter {
+        white-space: normal;
+        height: 100%;
+        box-sizing: content-box;
+        padding-bottom: 30px;
+        margin-bottom: -32px;
+        display: inline-block;
+    }
+
+    .CodeMirror-gutter-wrapper {
+        position: absolute;
+        z-index: 4;
+        border: none !important;
+        background-position: 0px 0px !important;
+        background-repeat: initial initial !important;
+    }
+
+    .CodeMirror-gutter-background {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        z-index: 4;
+    }
+
+    .CodeMirror-gutter-elt {
+        position: absolute;
+        cursor: default;
+        z-index: 4;
+    }
+
+    .CodeMirror-lines {
+        cursor: text;
+    }
+
+    .CodeMirror pre {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-width: 0px;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        white-space: pre;
+        word-wrap: normal;
+        color: inherit;
+        z-index: 2;
+        position: relative;
+        overflow: visible;
+        background-position: 0px 0px;
+        background-repeat: initial initial;
+    }
+
+    .CodeMirror-wrap pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: normal;
+    }
+
+    .CodeMirror-code pre {
+        border-right-width: 30px;
+        border-right-style: solid;
+        border-right-color: transparent;
+        width: fit-content;
+    }
+
+    .CodeMirror-wrap .CodeMirror-code pre {
+        border-right-style: none;
+        width: auto;
+    }
+
+    .CodeMirror-linebackground {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 0;
+    }
+
+    .CodeMirror-linewidget {
+        position: relative;
+        z-index: 2;
+        overflow: auto;
+    }
+
+    .CodeMirror-wrap .CodeMirror-scroll {
+        overflow-x: hidden;
+    }
+
+    .CodeMirror-measure {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .CodeMirror-measure pre {
+        position: static;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        position: absolute;
+        visibility: hidden;
+        border-right-style: none;
+        width: 0px;
+    }
+
+    .CodeMirror div.CodeMirror-cursor {
+        visibility: hidden;
+    }
+
+    .CodeMirror-focused div.CodeMirror-cursor {
+        visibility: inherit;
+    }
+
+    .cm-searching {
+        background-color: rgba(255, 255, 0, 0.4);
+        background-position: initial initial;
+        background-repeat: initial initial;
+    }
+
+    @media print {
+        .CodeMirror div.CodeMirror-cursor {
+            visibility: hidden;
+        }
+    }
+
+
+    html {
+        font-size: 19px;
+    }
+
+    html, body {
+        margin: auto;
+        background: #fefefe;
+    }
+
+    body {
+        font-family: "Vollkorn", Palatino, Times;
+        color: #333;
+        line-height: 1.4;
+        text-align: justify;
+    }
+
+    #write {
+        max-width: 960px;
+        margin: 0 auto;
+        margin-bottom: 2em;
+        line-height: 1.53;
+        padding-top: 40px;
+    }
+
+    /* Typography
+    -------------------------------------------------------- */
+
+    #write > h1:first-child,
+    h1 {
+        margin-top: 1.6em;
+        font-weight: normal;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        margin-top: 2em;
+        font-weight: normal;
+    }
+
+    h3 {
+        font-weight: normal;
+        font-style: italic;
+        margin-top: 3em;
+    }
+
+    h1,
+    h2,
+    h3 {
+        text-align: center;
+    }
+
+    h2:after {
+        border-bottom: 1px solid #2f2f2f;
+        content: '';
+        width: 100px;
+        display: block;
+        margin: 0 auto;
+        height: 1px;
+    }
+
+    h1 + h2, h2 + h3 {
+        margin-top: 0.83em;
+    }
+
+    p,
+    .mathjax-block {
+        margin-top: 0;
+        -webkit-hypens: auto;
+        -moz-hypens: auto;
+        hyphens: auto;
+    }
+
+    ul {
+        list-style: square;
+        padding-left: 1.2em;
+    }
+
+    ol {
+        padding-left: 1.2em;
+    }
+
+    blockquote {
+        margin-left: 1em;
+        padding-left: 1em;
+        border-left: 1px solid #ddd;
+    }
+
+    code,
+    pre {
+        font-family: "Consolas", "Menlo", "Monaco", monospace, serif;
+        font-size: .9em;
+        background: white;
+    }
+
+    .md-fences {
+        margin-left: 1em;
+        padding-left: 1em;
+        border: 1px solid #ddd;
+        padding-bottom: 8px;
+        padding-top: 6px;
+        margin-bottom: 1.5em;
+    }
+
+    a {
+        color: #2484c1;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a img {
+        border: none;
+    }
+
+    h1 a,
+    h1 a:hover {
+        color: #333;
+        text-decoration: none;
+    }
+
+    hr {
+        color: #ddd;
+        height: 1px;
+        margin: 2em 0;
+        border-top: solid 1px #ddd;
+        border-bottom: none;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .ty-table-edit {
+        background: #ededed;
+        padding-top: 4px;
+    }
+
+    table {
+        margin-bottom: 1.333333rem
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+        line-height: 1.333333rem;
+        vertical-align: top;
+        border-top: 1px solid #ddd
+    }
+
+    table th {
+        font-weight: bold
+    }
+
+    table thead th {
+        vertical-align: bottom
+    }
+
+    table caption + thead tr:first-child th,
+    table caption + thead tr:first-child td,
+    table colgroup + thead tr:first-child th,
+    table colgroup + thead tr:first-child td,
+    table thead:first-child tr:first-child th,
+    table thead:first-child tr:first-child td {
+        border-top: 0
+    }
+
+    table tbody + tbody {
+        border-top: 2px solid #ddd
+    }
+
+    .task-list {
+        padding: 0;
+    }
+
+    .md-task-list-item {
+        padding-left: 1.6rem;
+    }
+
+    .md-task-list-item > input:before {
+        content: '\221A';
+        display: inline-block;
+        width: 1.33333333rem;
+        height: 1.6rem;
+        vertical-align: middle;
+        text-align: center;
+        color: #ddd;
+        background-color: #fefefe;
+    }
+
+    .md-task-list-item > input:checked:before,
+    .md-task-list-item > input[checked]:before {
+        color: inherit;
+    }
+
+    .md-tag {
+        color: inherit;
+        font: inherit;
+    }
+
+    #write pre.md-meta-block {
+        min-height: 35px;
+        padding: 0.5em 1em;
+    }
+
+    #write pre.md-meta-block {
+        white-space: pre;
+        background: #f8f8f8;
+        border: 0px;
+        color: #999;
+
+        width: 100vw;
+        max-width: calc(100% + 60px);
+        margin-left: -30px;
+        border-left: 30px #f8f8f8 solid;
+        border-right: 30px #f8f8f8 solid;
+
+        margin-bottom: 2em;
+        margin-top: -1.3333333333333rem;
+        padding-top: 26px;
+        padding-bottom: 10px;
+        line-height: 1.8em;
+        font-size: 0.9em;
+        font-size: 0.76em;
+        padding-left: 0;
+    }
+
+    .md-img-error.md-image > .md-meta {
+        vertical-align: bottom;
+    }
+
+    #write > h5.md-focus:before {
+        top: 2px;
+    }
+
+    .md-toc {
+        margin-top: 40px;
+    }
+
+    .md-toc-content {
+        padding-bottom: 20px;
+    }
+
+    .outline-expander:before {
+        color: inherit;
+        font-size: 14px;
+        top: auto;
+        content: "\f0da";
+        font-family: FontAwesome;
+    }
+
+    .outline-expander:hover:before,
+    .outline-item-open > .outline-item > .outline-expander:before {
+        content: "\f0d7";
+    }
+
+    /** source code mode */
+    #typora-source {
+        font-family: Courier, monospace;
+        color: #6A6A6A;
+    }
+
+    .html-for-mac #typora-sidebar {
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    }
+
+    .cm-s-typora-default .cm-header,
+    .cm-s-typora-default .cm-property,
+    .CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+        color: #428bca;
+    }
+
+    .cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number {
+        color: #777777;
+    }
+
+    .typora-node .file-list-item-parent-loc,
+    .typora-node .file-list-item-time,
+    .typora-node .file-list-item-summary {
+        font-family: arial, sans-serif;
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.3em;
+        margin-top: calc(1rem - 12px);
+    }
+
+    .md-mathjax-midline {
+        background: #fafafa;
+    }
+
+    .md-fences .code-tooltip {
+        bottom: -2em !important;
+    }
+
+    .dropdown-menu .divider {
+        border-color: #e5e5e5;
+    }
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body>
+<p>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section">
+    <tbody>
+    <tr bgcolor="#ee77aa">
+        <td colspan="3" valign="bottom">&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>IntegerProgExperiment</strong></big></font>
+        </td>
+    </tr>
+
+    <tr>
+        <td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%">
+            <table width="100%" summary="list">
+                <tbody>
+                <tr>
+                    <td width="25%" valign="top"><a href="BranchAndBound.html"><strong>BranchAndBound</strong>&nbsp;(package)</a><br>
+                        <a href="CuttingPlane.html"><strong>CuttingPlane</strong>&nbsp;(package)</a><br>
+                    </td>
+                    <td width="25%" valign="top"><a href="HungarianAssignment.html"><strong>HungarianAssignment</strong>&nbsp;(package)</a><br>
+                        <a href="MonteCarlo.html"><strong>MonteCarlo</strong>&nbsp;(package)</a><br>
+                    </td>
+                    <td width="25%" valign="top"><a href="experiment.html">experiment</a><br>
+                    </td>
+                    <td width="25%" valign="top"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</p>
+<div id='write' class='is-mac'><h1><a name="integerprogexperiment" class="md-header-anchor"></a><span>IntegerProgExperiment</span>
+</h1>
+    <p style="text-align: center;"><span> 线性规划课程实验——整数规划问题的求解方法</span></p>
+    <h2><a name="仓库内容" class="md-header-anchor"></a><span>仓库内容</span></h2>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.98297119140625px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>6</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">.</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">├── BranchAndBound<span
+            class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation"
+                                                                             cm-text="	">    </span>整数线性规划问题的分支定界法实现</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">├── CuttingPlane<span
+            class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation"
+                                                                               cm-text="	">    </span>整数线性规划问题的割平面法实现</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">├── HungarianAssignment<span
+            class="cm-tab" role="presentation" cm-text="	"> </span>指派问题的匈牙利算法实现</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">├── MonteCarlo<span
+            class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation"
+                                                                             cm-text="	">    </span><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>整数规划问题的蒙特卡洛法实现</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">└── experiment.py<span class="cm-tab" role="presentation"
+                                                                                     cm-text="	">   </span><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>各算法实现的使用示例</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 163px;"></div><div
+            class="CodeMirror-gutters" style="height: 163px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h2><a name="实现简介" class="md-header-anchor"></a><span>实现简介</span></h2>
+    <h3><a name="分支定界法" class="md-header-anchor"></a><span>分支定界法</span></h3>
+    <blockquote><p><code>BranchAndBound</code><span>: 整数线性规划问题的「分支定界法」实现。</span></p></blockquote>
+    <h4><a name="问题模型" class="md-header-anchor"></a><span>问题模型</span></h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>5</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">Minimize: &nbsp; &nbsp; c^T * x</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Subject to: &nbsp; A_ub * x &lt;= b_ub</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  A_eq * x == b_eq</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  (x are integers)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 132px;"></div><div
+            class="CodeMirror-gutters" style="height: 132px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h4><a name="算法思路" class="md-header-anchor"></a><span>算法思路</span></h4>
+    <ol start=''>
+        <li><p><span>求整数规划松弛问题的最优解， 若松弛问题的最优解满足整数要求，则得到整数规划的最优解; 否则转下一步;</span></p></li>
+        <li><p><span>分枝、定界与剪枝</span></p>
+            <p><span>选一个非整数解的变量xi，在松弛问题中加上约束:</span>
+                <span class="MathJax_SVG" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="23.202ex" height="3.309ex"
+                        viewBox="0 -949 9989.9 1424.6" role="img" focusable="false" style="vertical-align: -1.104ex;"><defs><path
+                        stroke-width="0" id="E10-MJMATHI-78"
+                        d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path
+                        stroke-width="0" id="E10-MJMATHI-69"
+                        d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path><path
+                        stroke-width="0" id="E10-MJMAIN-2264"
+                        d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path><path
+                        stroke-width="0" id="E10-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path><path
+                        stroke-width="0" id="E10-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path><path
+                        stroke-width="0" id="E10-MJMAIN-2265"
+                        d="M83 616Q83 624 89 630T99 636Q107 636 253 568T543 431T687 361Q694 356 694 346T687 331Q685 329 395 192L107 56H101Q83 58 83 76Q83 77 83 79Q82 86 98 95Q117 105 248 167Q326 204 378 228L626 346L360 472Q291 505 200 548Q112 589 98 597T83 616ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path><path
+                        stroke-width="0" id="E10-MJMAIN-2B"
+                        d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path
+                        stroke-width="0" id="E10-MJMAIN-31"
+                        d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></defs><g
+                        stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use
+                        xlink:href="#E10-MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)"
+                                                                            xlink:href="#E10-MJMATHI-69" x="808"
+                                                                            y="-213"></use><use
+                        xlink:href="#E10-MJMAIN-2264" x="1193" y="0"></use><use xlink:href="#E10-MJMAIN-5B" x="2249"
+                                                                                y="0"></use><g
+                        transform="translate(2527,0)"><use xlink:href="#E10-MJMATHI-78" x="0" y="0"></use><use
+                        transform="scale(0.707)" xlink:href="#E10-MJMATHI-69" x="808" y="-213"></use></g><use
+                        xlink:href="#E10-MJMAIN-5D" x="3443" y="0"></use><g transform="translate(3721,0)"><text
+                        font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none"
+                        transform="scale(52.614) matrix(1 0 0 -1 0 0)">和</text></g><g transform="translate(4546,0)"><use
+                        xlink:href="#E10-MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)"
+                                                                            xlink:href="#E10-MJMATHI-69" x="808"
+                                                                            y="-213"></use></g><use
+                        xlink:href="#E10-MJMAIN-2265" x="5739" y="0"></use><use xlink:href="#E10-MJMAIN-5B" x="6795"
+                                                                                y="0"></use><g
+                        transform="translate(7073,0)"><use xlink:href="#E10-MJMATHI-78" x="0" y="0"></use><use
+                        transform="scale(0.707)" xlink:href="#E10-MJMATHI-69" x="808" y="-213"></use></g><use
+                        xlink:href="#E10-MJMAIN-5D" x="7989" y="0"></use><use xlink:href="#E10-MJMAIN-2B" x="8489"
+                                                                              y="0"></use><use
+                        xlink:href="#E10-MJMAIN-31" x="9489" y="0"></use></g></svg></span>
+                <script type="math/tex">x_i≤[x_i] 和 x_i≥[x_i]+1</script>
+                <span>(</span><span class="MathJax_SVG" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="3.419ex" height="2.698ex"
+                        viewBox="0 -843.8 1472 1161.5" role="img" focusable="false" style="vertical-align: -0.738ex;"><defs><path
+                        stroke-width="0" id="E14-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path><path
+                        stroke-width="0" id="E14-MJMATHI-78"
+                        d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path
+                        stroke-width="0" id="E14-MJMATHI-69"
+                        d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path><path
+                        stroke-width="0" id="E14-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></defs><g
+                        stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use
+                        xlink:href="#E14-MJMAIN-5B" x="0" y="0"></use><g transform="translate(278,0)"><use
+                        xlink:href="#E14-MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)"
+                                                                            xlink:href="#E14-MJMATHI-69" x="808"
+                                                                            y="-213"></use></g><use
+                        xlink:href="#E14-MJMAIN-5D" x="1193" y="0"></use></g></svg></span>
+                <script type="math/tex">[x_i]</script>
+                <span>: 小于 </span><span class="MathJax_SVG" tabindex="-1"
+                                        style="font-size: 100%; display: inline-block;"><svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="2.127ex" height="1.72ex"
+                        viewBox="0 -528.1 916 740.6" role="img" focusable="false" style="vertical-align: -0.493ex;"><defs><path
+                        stroke-width="0" id="E16-MJMATHI-78"
+                        d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path
+                        stroke-width="0" id="E16-MJMATHI-69"
+                        d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></defs><g
+                        stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use
+                        xlink:href="#E16-MJMATHI-78" x="0" y="0"></use><use transform="scale(0.707)"
+                                                                            xlink:href="#E16-MJMATHI-69" x="808"
+                                                                            y="-213"></use></g></svg></span>
+                <script type="math/tex">x_i</script>
+                <span> 的最大整数) </span></p>
+            <p><span>构成两个新的松弛问题，称为分枝。</span></p>
+            <p><span>检查所有分枝的最优解及最优值，进行定界、剪枝: </span></p>
+            <ul>
+                <li><span>若某分枝的最优解是整数并且目标函数值大于其它分枝的最优值 ，则将其它分枝剪去不再计算; </span></li>
+                <li><span>若还存在非整数解并且最优值大于整数解的最优值，转 2)，需要继续分枝、定界、剪枝，直到得到最优解 </span><span class="MathJax_SVG"
+                                                                                        tabindex="-1"
+                                                                                        style="font-size: 100%; display: inline-block;"><svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="2.143ex" height="2.087ex"
+                        viewBox="0 -791.2 922.5 898.4" role="img" focusable="false" style="vertical-align: -0.249ex;"><defs><path
+                        stroke-width="0" id="E22-MJMATHI-7A"
+                        d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path><path
+                        stroke-width="0" id="E22-MJMAIN-2217"
+                        d="M229 286Q216 420 216 436Q216 454 240 464Q241 464 245 464T251 465Q263 464 273 456T283 436Q283 419 277 356T270 286L328 328Q384 369 389 372T399 375Q412 375 423 365T435 338Q435 325 425 315Q420 312 357 282T289 250L355 219L425 184Q434 175 434 161Q434 146 425 136T401 125Q393 125 383 131T328 171L270 213Q283 79 283 63Q283 53 276 44T250 35Q231 35 224 44T216 63Q216 80 222 143T229 213L171 171Q115 130 110 127Q106 124 100 124Q87 124 76 134T64 161Q64 166 64 169T67 175T72 181T81 188T94 195T113 204T138 215T170 230T210 250L74 315Q65 324 65 338Q65 353 74 363T98 374Q106 374 116 368T171 328L229 286Z"></path></defs><g
+                        stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use
+                        xlink:href="#E22-MJMATHI-7A" x="0" y="0"></use><use transform="scale(0.707)"
+                                                                            xlink:href="#E22-MJMAIN-2217" x="663"
+                                                                            y="513"></use></g></svg></span>
+                    <script type="math/tex">z^*</script>
+                    <span>。</span></li>
+            </ul>
+        </li>
+    </ol>
+    <h4><a name="实现-api" class="md-header-anchor"></a><span>实现 API</span></h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">BranchAndBound</span>.<span
+            class="cm-property">branch_and_bound</span>(<span class="cm-variable">c</span>, <span class="cm-variable">A_ub</span>, <span
+            class="cm-variable">b_ub</span>, <span class="cm-variable">A_eq</span>, <span
+            class="cm-variable">b_eq</span>, <span class="cm-variable">bounds</span>, <span class="cm-variable">bnbTreeNode</span>=<span
+            class="cm-keyword">None</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 53px;"></div><div
+            class="CodeMirror-gutters" style="height: 53px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>该算法实现使用递归调用实现，底层对于松弛问题求解调用 </span><code>scipy.optimize.linprog</code><span> 完成。</span></p>
+    <p><span>参数 </span><code>c, A_ub, b_ub, A_eq, b_eq,
+        bounds</code><span> 的要求与 </span><code>scipy.optimize.linprog</code><span> 的同名参数完全相同。</span></p>
+    <p><span>在使用过程中，可以提供一个 </span><code>BranchAndBound.BnBTreeNode</code><span> 实例作为根节点来记录求解过程，得到一个求解过程的树形图。</span></p>
+    <h4><a name="使用示例" class="md-header-anchor"></a><span>使用示例</span></h4>
+    <p><span>对于问题：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>5</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">min 3 * x_0 + 4 * x_1 + x_2</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">s.t. x_0 + 6 * x_1 + 2 * x_2 &gt;= 5</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span> 2 * x_0 &gt;= 3</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span> x_0, x_1, x_2 &gt;= 0, 为整数</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 134px;"></div><div
+            class="CodeMirror-gutters" style="height: 134px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>编写如下代码使用实现的接口进行求解：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 43.636383056640625px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 40px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>10</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -40px; width: 40px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 31px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span
+            class="cm-variable">BranchAndBound</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">c</span> = [<span class="cm-number">3</span>, <span class="cm-number">4</span>, <span
+            class="cm-number">1</span>]</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">A_ub</span> = [[<span class="cm-operator">-</span><span
+            class="cm-number">1</span>, <span class="cm-operator">-</span><span class="cm-number">6</span>, <span
+            class="cm-operator">-</span><span class="cm-number">2</span>], [<span class="cm-operator">-</span><span
+            class="cm-number">2</span>, <span class="cm-number">0</span>, <span
+            class="cm-number">0</span>]]</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">5</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">b_ub</span> = [<span class="cm-operator">-</span><span class="cm-number">5</span>, <span
+            class="cm-operator">-</span><span class="cm-number">3</span>]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">6</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">bounds</span> = [(<span class="cm-number">0</span>, <span class="cm-keyword">None</span>), (<span
+            class="cm-number">0</span>, <span class="cm-keyword">None</span>), (<span class="cm-number">0</span>, <span
+            class="cm-keyword">None</span>)]</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">7</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">tree</span> = <span class="cm-variable">BranchAndBound</span>.<span class="cm-property">BnBTree</span>()</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">8</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">r</span> = <span class="cm-variable">BranchAndBound</span>.<span class="cm-property">branch_and_bound</span>(<span
+            class="cm-variable">c</span>, <span class="cm-variable">A_ub</span>, <span class="cm-variable">b_ub</span>, <span
+            class="cm-keyword">None</span>, <span class="cm-keyword">None</span>, <span
+            class="cm-variable">bounds</span>, <span class="cm-variable">tree</span>.<span
+            class="cm-property">root</span>)</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">9</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-builtin">print</span>(<span class="cm-variable">r</span>)</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 31px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span
+            class="cm-variable">tree</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 290px;"></div><div
+            class="CodeMirror-gutters" style="height: 290px; left: 0px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 39px;"></div></div></div></div></pre>
+    <p><span>输出：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>8</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation"
+            style="padding-right: 0.1px;">{'success': True, 'x': array([2., 0., 2.]), 'fun': 8.0}</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">-- Root: [1.5  0. &nbsp; 1.75] -&gt; 6.250000000000001</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation"
+            cm-text="	">    </span>|-- x[0] &lt;= 1: nan -&gt; 1.0</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation"
+            cm-text="	">    </span>|-- x[0] &gt;= 2: [2.  0.  1.5] -&gt; 7.5</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>|<span class="cm-tab" role="presentation"
+                                                                                cm-text="	">   </span>|-- x[2] &lt;= 1: [2.  0.16666667 1.] -&gt; 7.666666666666667</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">6</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>|<span class="cm-tab" role="presentation"
+                                                                                cm-text="	">   </span>|<span
+            class="cm-tab" role="presentation"
+            cm-text="	">   </span>|-- x[1] &lt;= 0: [3. 0. 1.] -&gt; 10.0</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">7</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>|<span class="cm-tab" role="presentation"
+                                                                                cm-text="	">   </span>|<span
+            class="cm-tab" role="presentation"
+            cm-text="	">   </span>|-- x[1] &gt;= 1: [2. 1. 0.] -&gt; 10.0</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span>|<span class="cm-tab"
+                                                                                                     role="presentation"
+                                                                                                     cm-text="	">   </span>|-- x[2] &gt;= 2: [2. 0. 2.] -&gt; 8.0</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 243px;"></div><div
+            class="CodeMirror-gutters" style="height: 243px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h3><a name="割平面法" class="md-header-anchor"></a><span>割平面法</span></h3>
+    <blockquote><p><code>CuttingPlane</code><span>: 整数线性规划问题的割平面法实现。</span></p></blockquote>
+    <p><span>（这个实现有 Bug，我没改，对于部分问题会求解失败，不推荐使用）</span></p><h4><a name="问题模型-n880"
+                                                                class="md-header-anchor"></a><span>问题模型</span></h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>4</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">Maximize: &nbsp; &nbsp; c^T * x</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Subject to: &nbsp; A * x == b</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-tab" role="presentation"
+            cm-text="	">    </span>  (x are integers)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 106px;"></div><div
+            class="CodeMirror-gutters" style="height: 106px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h4><a name="算法思路-n882" class="md-header-anchor"></a><span>算法思路</span></h4>
+    <p>
+        <span>先不考虑变量的整数约束，求解相应的线性规划， 然后不断增加线性约束条件(即割平面)， 将原可行域割掉不含整数可行解的一部分， 最终得到一个具有整数坐标顶点的可行域， 而该顶点恰好是原整数规划问题的最优解。</span>
+    </p><h4><a name="实现-api-n884" class="md-header-anchor"></a><span>实现 API</span></h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">CuttingPlane</span>.<span
+            class="cm-property">cutting_plane</span>(<span class="cm-variable">c</span>, <span
+            class="cm-variable">A</span>, <span class="cm-variable">b</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 26px;"></div><div
+            class="CodeMirror-gutters" style="height: 26px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>该算法实现使用递归调用实现，底层对于松弛问题求解调用  </span><a href='https://github.com/cdfmlr/SimplexLinprog'><code>cdfmlr/SimplexLinprog</code></a><span> 中的 </span><code>linprog.simplex_method.SimplexMethod</code><span> 完成。</span>
+    </p>
+    <p><span>参数 </span><code>c, A, b</code><span> 的要求和 </span><code>linprog.simplex_method.SimplexMethod</code><span> 完全相同。</span>
+    </p>
+    <p><span>使用过程中要注意将问题化为标准型。</span></p><h4><a name="使用示例-n889" class="md-header-anchor"></a><span>使用示例</span></h4>
+    <p><span>对于问题：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>5</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">max x_0 + x_1</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">s.t. 2 * x_0 + x_1 &lt;= 6</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span> 4 * x_0 + 5 * x_1 &lt;= 20</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span> x_0, x_1 &gt;= 0, 为整数</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 134px;"></div><div
+            class="CodeMirror-gutters" style="height: 134px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>编写如下代码使用实现的接口进行求解：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>7</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span
+            class="cm-variable">CuttingPlane</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">c</span> = [<span class="cm-number">1</span>, <span class="cm-number">1</span>, <span
+            class="cm-number">0</span>, <span class="cm-number">0</span>]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">a</span> = [[<span class="cm-number">2</span>, <span class="cm-number">1</span>, <span
+            class="cm-number">1</span>, <span class="cm-number">0</span>], [<span class="cm-number">4</span>, <span
+            class="cm-number">5</span>, <span class="cm-number">0</span>, <span
+            class="cm-number">1</span>]]</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">b</span> = [<span class="cm-number">6</span>, <span class="cm-number">20</span>]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">6</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">r</span> = <span class="cm-variable">CuttingPlane</span>.<span class="cm-property">cutting_plane</span>(<span
+            class="cm-variable">c</span>, <span class="cm-variable">a</span>, <span class="cm-variable">b</span>)</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span
+            class="cm-variable">r</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 185px;"></div><div
+            class="CodeMirror-gutters" style="height: 185px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>输出：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.98297119140625px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">{<span class="cm-string">'success'</span>: <span
+            class="cm-keyword">True</span>, <span class="cm-string">'x'</span>: <span class="cm-variable">array</span>([<span
+            class="cm-number">2.</span>, <span class="cm-number">2.</span>, <span class="cm-number">0.</span>, <span
+            class="cm-number">2.</span>, <span class="cm-number">0.</span>]), <span
+            class="cm-string">'fun'</span>: <span class="cm-operator">-</span><span class="cm-number">0.33333333333333326</span>}</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 53px;"></div><div
+            class="CodeMirror-gutters" style="height: 53px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h3><a name="蒙特卡洛法" class="md-header-anchor"></a><span>蒙特卡洛法</span></h3>
+    <blockquote><p><code>MonteCarl</code><span>: 整数规划问题的蒙特卡洛法实现。</span></p></blockquote>
+    <h4><a name="问题模型-n899" class="md-header-anchor"></a><span>问题模型</span></h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>4</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">Minimize: &nbsp; fun(x)</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Subject to: cons(x) &lt;= 0</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span><span class="cm-tab"
+                                                                                                    role="presentation"
+                                                                                                    cm-text="	">    </span><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>(x are integers)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 106px;"></div><div
+            class="CodeMirror-gutters" style="height: 106px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h4><a name="算法思路-n901" class="md-header-anchor"></a><span>算法思路</span></h4>
+    <p><span>当所求解问题是某种随机事件出现的概率，或者是某个随机变量的期望值时，通过某种“实验”的方法，以这种事件出现的频率估计这一随机事件的概率，或者得到这个随机变量的某些数字特征，并将其作为问题的解。</span></p>
+    <p><span>对于线性、非线性的整数规划，在一定计算量下可以用这种思想，通过大量的随机试验，得到一个满意解。</span></p><h4><a name="实现-api-n904"
+                                                                              class="md-header-anchor"></a><span>实现 API</span>
+    </h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">MonteCarl</span>.<span
+            class="cm-property">monte_carlo</span>(<span class="cm-variable">x_nums</span>, <span class="cm-variable">fun</span>, <span
+            class="cm-variable">cons</span>, <span class="cm-variable">bounds</span>, <span class="cm-variable">random_times</span>=<span
+            class="cm-number">10</span><span class="cm-operator">**</span><span class="cm-number">5</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 53px;"></div><div
+            class="CodeMirror-gutters" style="height: 53px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p>
+        <span>Monte carlo 方法可以求解非线性的整数规划，目标函数、约束条件不在由向量、矩阵给出，而可以直接使用两个方法 </span><code>fun</code><span>、</span><code>cons</code><span> 来表达。</span>
+    </p>
+    <p>
+        <span>注意：蒙特卡洛法只能在一定次数的模拟中求一个满意解（通常不是最优的），而且对于每个变量必须给出</span><strong><span>有明确上下界的取值范围</span></strong><span>。</span>
+    </p><h4><a name="使用示例-n908" class="md-header-anchor"></a><span>使用示例</span></h4>
+    <p><span>对于问题：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>5</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">max x_0 + x_1</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">s.t. 2 * x_0 + x_1 &lt;= 6</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span> 4 * x_0 + 5 * x_1 &lt;= 20</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation"
+                                                                    cm-text="	">    </span> 0 &lt;= x_0, x_1 &lt;= 100, 为整数</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 134px;"></div><div
+            class="CodeMirror-gutters" style="height: 134px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>编写如下代码使用实现的接口进行求解：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"
+         style="page-break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 43.636383056640625px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 40px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>14</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -40px; width: 40px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 31px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span
+            class="cm-variable">MonteCarlo</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">def</span> <span class="cm-def">fun</span>(<span
+            class="cm-variable">x</span>):</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">return</span> <span class="cm-variable">x</span>[<span class="cm-number">0</span>] <span
+            class="cm-operator">+</span> <span class="cm-variable">x</span>[<span
+            class="cm-number">1</span>]</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">5</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">6</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-keyword">def</span> <span class="cm-def">cons</span>(<span
+            class="cm-variable">x</span>):</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">7</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span
+            class="cm-keyword">return</span> [</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">8</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-number">2</span> <span class="cm-operator">*</span> <span class="cm-variable">x</span>[<span
+            class="cm-number">0</span>] <span class="cm-operator">+</span> <span class="cm-variable">x</span>[<span
+            class="cm-number">1</span>] <span class="cm-operator">-</span> <span
+            class="cm-number">6</span>,</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">9</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span
+            class="cm-number">4</span> <span class="cm-operator">*</span> <span class="cm-variable">x</span>[<span
+            class="cm-number">0</span>] <span class="cm-operator">+</span> <span class="cm-number">5</span> <span
+            class="cm-operator">*</span> <span class="cm-variable">x</span>[<span class="cm-number">1</span>] <span
+            class="cm-operator">-</span> <span class="cm-number">20</span>,</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 31px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"> &nbsp;  ]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">11</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">12</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">bounds</span> = [(<span class="cm-number">0</span>, <span class="cm-number">100</span>), (<span
+            class="cm-number">0</span>, <span class="cm-number">100</span>)]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 31px;">13</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">r</span> = <span class="cm-variable">MonteCarlo</span>.<span class="cm-property">monte_carlo</span>(<span
+            class="cm-number">2</span>, <span class="cm-variable">fun</span>, <span
+            class="cm-variable">cons</span>, <span class="cm-variable">bounds</span>)</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -40px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 31px;">14</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span
+            class="cm-variable">r</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 369px;"></div><div
+            class="CodeMirror-gutters" style="height: 369px; left: 0px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 39px;"></div></div></div></div></pre>
+    <p><span>输出：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation"
+            style="padding-right: 0.1px;">{'fun': 4, 'x': [1, 3]}</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 26px;"></div><div
+            class="CodeMirror-gutters" style="height: 26px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h3><a name="匈牙利算法" class="md-header-anchor"></a><span>匈牙利算法</span></h3>
+    <blockquote><p><code>HungarianAssignment</code><span>: 指派问题的匈牙利算法实现。</span></p></blockquote>
+    <h4><a name="问题模型-n918" class="md-header-anchor"></a><span>问题模型</span></h4>
+    <p><span>设 n 个人被分配去做 n 件工作，规定每个人只做一件工作，每 件工作只有一个人去做。已知第i个人去做第j 件工作的效率 ( 时间或费用)为</span><code>c_{ij}</code><span> (i=1,2,...,n; j=1,2,...,n)并假设 </span><code>c_{ij}
+        ≥ 0</code><span>。问 应如何分配才能使总效率( 时间或费用)最高?</span></p>
+    <p><span>设决策变量：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>3</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">x_{ij} = 1  若指派第i个人做第j件工作</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-tab" role="presentation" cm-text="	">    </span>  or 0  不指派第i个人做第j件工作</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation"
+            style="padding-right: 0.1px;">for i, j = 1, 2, ..., n</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 80px;"></div><div
+            class="CodeMirror-gutters" style="height: 80px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>则问题可表示为：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>3</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">\min \sum_i \sum_j C_{i,j} X_{i,j}</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;">s.t. each row is assignment to at most one column, and each column to at most one row.</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 105px;"></div><div
+            class="CodeMirror-gutters" style="height: 105px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h4><a name="算法思路-n924" class="md-header-anchor"></a><span>算法思路</span></h4>
+    <p><span>step1. 变换指派问题的系数矩阵(</span><code>c_{ij}</code><span>)为(</span><code>b_{ij}</code><span>)，使在(</span><code>b_{ij}</code><span>)的各行各列中都出现0元素，即:</span>
+    </p>
+    <ol start=''>
+        <li><span>从(</span><code>c_{ij}</code><span>)的每行元素都减去该行的最小元素;</span></li>
+        <li><span>再从所得新系数矩阵的每列元素中减去该列的最小元素。</span></li>
+    </ol>
+    <p><span>step2. 进行试指派，以寻求最优解。</span></p>
+    <p>
+        <span>在(</span><code>b_{ij}</code><span>)中找尽可能多的独立0元素，若能找出n个独立0元素，就以这n个独立0元素对应解矩阵(</span><code>x_{ij}</code><span>)中的元素为1，其余为0，这就得到最优解。</span>
+    </p>
+    <p><span>找独立0元素的步骤为:</span></p>
+    <ol start=''>
+        <li><span>从只有一个0元素的行开始，给该行中的0元素加圈，记作◎。然后划去◎所在列的其它0元素，记作Ø ;这表示该列所代表的任务已指派完，不必再考虑别人了。依次进行到最后一行。</span></li>
+        <li><span>从只有一个0元素的列开始(画Ø的不计在内)，给该列中的0元素加圈，记作◎;然后划去◎所在行的0元素，记作Ø ，表示此人已有任务，不再为其指派其他任务。依次进行到最后一列。</span></li>
+        <li><span>若仍有没有划圈且未被划掉的0元素，则同行(列)的0元素至少有两个，比较这行各0元素所在列中0元素的数目，选择0元素少的这个0元素加圈(表示选择性多的要“礼让”选择性少的)。然后划掉同行同列 的其它0元素。可反复进行，直到所有0元素都已圈出和划掉为止。</span>
+        </li>
+        <li><span>若◎元素的数目m等于矩阵的阶数n(即 m=n)，那么这指派问题的最优解已得到。若 m &lt; n, 则转入下一步。</span></li>
+    </ol>
+    <p><span>step3. 用最少的直线通过所有0元素。具体方法为:</span></p>
+    <ol start=''>
+        <li><span>对没有◎的行打“√”;</span></li>
+        <li><span>对已打“√” 的行中所有含Ø元素的列打“√” ;</span></li>
+        <li><span>再对打有“√”的列中含◎ 元素的行打“√” ;</span></li>
+        <li><span>重复2、 3直到得不出新的打√号的行、列为止;</span></li>
+        <li><span>对没有打√号的行画横线，有打√号的列画纵线，这就得到覆 盖所有0元素的最少直线数 l 。</span></li>
+    </ol>
+    <p><span>注: l 应等于 m， 若不相等，说明试指派过程有误，回到第2步，另行试指派;</span>
+        <span>若 l = m &lt; n，表示还不能确定最优指派方案，须再变换当前的系数矩阵，以找到n个独立的0元素，为此转第4步。</span></p>
+    <p><span>step4. 变换矩阵(</span><code>b_{ij}</code><span>)以增加0元素</span></p>
+    <p><span>在没有被直线通过的所有元素中找出最小值，没有被直线通过的所有元素减去这个最小元素;直线交点处的元素加上这个最小值。新系数矩阵的最优解和原问题仍相同。转回第2步。</span></p><h4><a
+            name="实现-api-n958" class="md-header-anchor"></a><span>实现 API</span></h4>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">HungarianAssignment</span>.<span
+            class="cm-property">hungarian_assignment</span>(<span
+            class="cm-variable">cost_matrix</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 26px;"></div><div
+            class="CodeMirror-gutters" style="height: 26px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>调用该函数，会对给定的指派问题试使用上述思路的实现求解。由于该函数设计与 </span><code>scipy.optimize.linear_sum_assignment</code><span> 基本一致，故在出现问题时，会调用 </span><code>linear_sum_assignment</code><span> 尝试进一步求解。</span>
+    </p><h4><a name="使用示例-n961" class="md-header-anchor"></a><span>使用示例</span></h4>
+    <p><span>对于问题：</span></p>
+    <p><span>有一份中文说明书，需译成英、日、德、俄四种文字。分别记作E、J、G、R。现有甲、乙、丙、丁四人。他们将中文说明书翻译成不同语种的说明书所需时间如下表所示。问应指派何人去完成何工作，使所需总时间最少？</span>
+    </p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th><span>人员 \ 任务</span></th>
+                <th><span>E</span></th>
+                <th><span>J</span></th>
+                <th><span>G</span></th>
+                <th><span>R</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span>甲</span></td>
+                <td><span>2</span></td>
+                <td><span>15</span></td>
+                <td><span>13</span></td>
+                <td><span>4</span></td>
+            </tr>
+            <tr>
+                <td><span>乙</span></td>
+                <td><span>10</span></td>
+                <td><span>4</span></td>
+                <td><span>14</span></td>
+                <td><span>15</span></td>
+            </tr>
+            <tr>
+                <td><span>丙</span></td>
+                <td><span>9</span></td>
+                <td><span>14</span></td>
+                <td><span>16</span></td>
+                <td><span>13</span></td>
+            </tr>
+            <tr>
+                <td><span>丁</span></td>
+                <td><span>7</span></td>
+                <td><span>8</span></td>
+                <td><span>11</span></td>
+                <td><span>9</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <p><span>编写如下代码使用实现的接口进行求解：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="python"><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>8</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span
+            class="cm-variable">HungarianAssignment</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            cm-text="">​</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">c</span> = [[<span class="cm-number">2</span>, <span class="cm-number">15</span>, <span
+            class="cm-number">13</span>, <span class="cm-number">4</span>], [<span class="cm-number">10</span>, <span
+            class="cm-number">4</span>, <span class="cm-number">14</span>, <span class="cm-number">15</span>], [<span
+            class="cm-number">9</span>, <span class="cm-number">14</span>, <span class="cm-number">16</span>, <span
+            class="cm-number">13</span>], [<span class="cm-number">7</span>, <span class="cm-number">8</span>, <span
+            class="cm-number">11</span>, <span class="cm-number">9</span>]]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">r</span> = <span class="cm-variable">HungarianAssignment</span>.<span
+            class="cm-property">hungarian_assignment</span>(<span class="cm-variable">c</span>)</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-builtin">print</span>(<span class="cm-variable">r</span>)</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">6</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">m</span> = <span class="cm-variable">np</span>.<span
+            class="cm-property">zeros</span>(<span class="cm-variable">np</span>.<span class="cm-property">array</span>(<span
+            class="cm-variable">c</span>).<span class="cm-property">shape</span>, <span class="cm-variable">dtype</span>=<span
+            class="cm-builtin">int</span>)</span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">7</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span
+            class="cm-variable">m</span>[<span class="cm-variable">r</span>] = <span
+            class="cm-number">1</span></span></pre></div><div style="position: relative;"><div
+            class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span
+            class="cm-variable">m</span>)</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 237px;"></div><div
+            class="CodeMirror-gutters" style="height: 237px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <p><span>输出：</span></p>
+    <pre spellcheck="false" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang=""><div
+            class="CodeMirror cm-s-inner CodeMirror-wrap" lang=""><div
+            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 32.62786865234375px;"><textarea
+            autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0"
+            style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div
+            class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler"
+                                                                                 cm-not-content="true"></div><div
+            class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"
+                                                         style="margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div
+            style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div
+            role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>5</div></div></div><div
+            class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div
+            class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline"
+                                                                      style="position: relative;"><div
+            class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div
+            class="CodeMirror-gutter-background CodeMirror-activeline-gutter"
+            style="left: -28.991485595703125px; width: 29px;"></div><div
+            class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation"
+            style="padding-right: 0.1px;">(array([0, 1, 2, 3]), array([3, 1, 0, 2]))</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">[[0 0 0 1]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> [0 1 0 0]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre
+            class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> [1 0 0 0]</span></pre></div><div
+            style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28.991485595703125px;"><div
+            class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show"
+            style="left: 0px; width: 20px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span
+            role="presentation"
+            style="padding-right: 0.1px;"> [0 0 1 0]]</span></pre></div></div></div></div></div></div><div
+            style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 132px;"></div><div
+            class="CodeMirror-gutters" style="height: 132px; left: 0.008514404296875px;"><div
+            class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></pre>
+    <h2><a name="开放源代码" class="md-header-anchor"></a><span>开放源代码</span></h2>
+    <p style="text-align: center;"><span>MIT License</span></p>
+    <p style="text-align: center;"><span>Copyright (c) 2020 cdfmlr</span></p></div>
+
+</body>
+</html>

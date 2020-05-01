@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module CuttingPlane.linprog.simplex_method</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="CuttingPlane.html"><font color="#ffffff">CuttingPlane</font></a>.<a href="CuttingPlane.linprog.html"><font color="#ffffff">linprog</font></a>.simplex_method</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/c/Projects/IntegerProgExperiment/CuttingPlane/linprog/simplex_method.py">/Users/c/Projects/IntegerProgExperiment/CuttingPlane/linprog/simplex_method.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="CuttingPlane.linprog.solver.html#LpSolver">CuttingPlane.linprog.solver.LpSolver</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="CuttingPlane.linprog.simplex_method.html#SimplexMethod">SimplexMethod</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SimplexMethod">class <strong>SimplexMethod</strong></a>(<a href="CuttingPlane.linprog.solver.html#LpSolver">CuttingPlane.linprog.solver.LpSolver</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SimplexMethod">SimplexMethod</a>(problem:&nbsp;CuttingPlane.linprog.problem.LpProblem)<br>
+&nbsp;<br>
+单纯形(表)法<br>
+&nbsp;<br>
+待解决应符合标准型，即：<br>
+&lt;math&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max&nbsp;z&nbsp;=&nbsp;c^T&nbsp;*&nbsp;x<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s.t.&nbsp;a*x&nbsp;=&nbsp;b,&nbsp;x&nbsp;&gt;=&nbsp;0,&nbsp;b&nbsp;&gt;&nbsp;0<br>
+&lt;/math&gt;<br>
+&nbsp;<br>
+单纯形算法参考：https://zh.wikipedia.org/zh-hans/单纯形法<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="CuttingPlane.linprog.simplex_method.html#SimplexMethod">SimplexMethod</a></dd>
+<dd><a href="CuttingPlane.linprog.solver.html#LpSolver">CuttingPlane.linprog.solver.LpSolver</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SimplexMethod-__init__"><strong>__init__</strong></a>(self, problem: CuttingPlane.linprog.problem.LpProblem)</dt><dd><tt>:param&nbsp;problem:&nbsp;待解决的问题(LpProblem实例)</tt></dd></dl>
+
+<dl><dt><a name="SimplexMethod-big_m"><strong>big_m</strong></a>(self, **kwargs)</dt><dd><tt>用大M法得到初始基<br>
+&nbsp;<br>
+:param&nbsp;kwargs:&nbsp;show_tab=True&nbsp;(default&nbsp;False):&nbsp;打印运算过程<br>
+:return:&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="SimplexMethod-find_idt_base"><strong>find_idt_base</strong></a>(self)</dt><dd><tt>尝试找单位阵作初始基<br>
+&nbsp;<br>
+:return:&nbsp;True&nbsp;if&nbsp;success&nbsp;False&nbsp;else</tt></dd></dl>
+
+<dl><dt><a name="SimplexMethod-solve"><strong>solve</strong></a>(self, **kwargs) -&gt; CuttingPlane.linprog.solve.LpSolve</dt><dd><tt>单纯形算法入口<br>
+&nbsp;<br>
+:param&nbsp;kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;base_idx=[...]&nbsp;(default&nbsp;[]):&nbsp;指定初始基，缺省则由算法自行确定<br>
+&nbsp;&nbsp;&nbsp;&nbsp;show_tab=True&nbsp;&nbsp;(default&nbsp;False):&nbsp;打印单纯形表<br>
+&nbsp;&nbsp;&nbsp;&nbsp;two_step=True&nbsp;&nbsp;(default&nbsp;False):&nbsp;使用两阶段法<br>
+&nbsp;&nbsp;&nbsp;&nbsp;big_m=True&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(default&nbsp;True):&nbsp;&nbsp;使用大&nbsp;M&nbsp;法<br>
+:return:&nbsp;问题的解</tt></dd></dl>
+
+<dl><dt><a name="SimplexMethod-two_step"><strong>two_step</strong></a>(self, **kwargs)</dt><dd><tt>用两阶段法得到初始基，第一阶段在此计算<br>
+&nbsp;<br>
+:param&nbsp;kwargs:&nbsp;show_tab=True&nbsp;(default&nbsp;False):&nbsp;打印单纯形表<br>
+:return:&nbsp;第一阶段的解</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>Problem</strong> = &lt;class 'CuttingPlane.linprog.simplex_method.SimplexMethod.Problem'&gt;<dd><tt>单纯形(表)法内部的线性规划问题表示</tt></dl>
+
+<hr>
+Data descriptors inherited from <a href="CuttingPlane.linprog.solver.html#LpSolver">CuttingPlane.linprog.solver.LpSolver</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
