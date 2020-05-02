@@ -16,7 +16,7 @@ See Docs Here：https://cdfmlr.github.io/IntegerProgExperiment/
 
 ## 实现简介
 
-###分支定界法
+### 分支定界法
 
 > `BranchAndBound`: 整数线性规划问题的「分支定界法」实现。
 
